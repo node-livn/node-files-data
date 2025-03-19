@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "BOSCH KGN39VI306",
+    "description": "Холодильник BOSCH",
+    "price": 12000,
+    "categoryId": 3
+  },
+  {
+    "id": 2,
+    "name": "Samsung RF28R7201SR",
+    "description": "Холодильник Samsung",
+    "price": 15000,
+    "categoryId": 3
+  }
+]

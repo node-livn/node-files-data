@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Побутова техніка",
+    "parentId": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "Крупна побутова техніка",
+        "parentId": 1,
+        "children": [
+          {
+            "id": 3,
+            "name": "Холодильники",
+            "parentId": 2,
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]
