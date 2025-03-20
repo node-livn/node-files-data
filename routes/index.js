@@ -9,10 +9,16 @@ router.get('/', (req, res) => {
   res.render('index');
 });
 
-// Сторінка з товарами
+// Сторінка з усіма товарами
 router.get('/products', productController.listProducts);
 
 // Сторінка з категоріями
 router.get('/categories', categoryController.listCategories);
+
+// Сторінка однієї категорії
+router.get('/categories/:id', categoryController.showCategory);
+
+// Товари певної категорії
+router.get('/categories/:categoryId/products', productController.listProductsByCategory);
 
 module.exports = router;

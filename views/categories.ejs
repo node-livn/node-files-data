@@ -3,24 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Список категорій</title>
-    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
 <h1>Список категорій</h1>
-<ul>
-    <% categories.forEach(category => { %>
-        <li>
-            <strong><%= category.name %></strong>
-            <% if (category.children && category.children.length) { %>
-                <ul>
-                    <% category.children.forEach(child => { %>
-                        <li><%= child.name %></li>
-                    <% }); %>
-                </ul>
-            <% } %>
-        </li>
-    <% }); %>
-</ul>
+
+<%- include('partials/categoryTree', { categories }) %>
+
 <a href="/">На головну</a>
 </body>
 </html>

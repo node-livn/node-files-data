@@ -7,7 +7,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware для статичних файлів
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/stylesheets', express.static(path.join(__dirname, 'public/stylesheets')));
 
 // Роутер
 const router = require('./routes/index');

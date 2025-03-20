@@ -12,5 +12,26 @@
     "description": "Холодильник Samsung",
     "price": 15000,
     "categoryId": 3
+  },
+  {
+    "id": 3,
+    "name": "LG F4V5VG0W",
+    "description": "Пральна машина LG",
+    "price": 11000,
+    "categoryId": 4
+  },
+  {
+    "id": 4,
+    "name": "Philips HD9350",
+    "description": "Електрочайник Philips",
+    "price": 1500,
+    "categoryId": 6
+  },
+  {
+    "id": 5,
+    "name": "Tefal TT6408",
+    "description": "Тостер Tefal",
+    "price": 2000,
+    "categoryId": 7
   }
 ]

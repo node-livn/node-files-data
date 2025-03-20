@@ -1,11 +1,10 @@
-// Простий клас Product для демонстрації структури даних
+// Клас Product для представлення товару
 class Product {
-    constructor(id, name, description, price, categoryId) {
+    constructor(id, name, description, price) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.categoryId = categoryId;
     }
 }
 
