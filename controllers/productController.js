@@ -1,60 +1,50 @@
 const productService = require('../services/productService');
-const Product = require('../models/product');
+const { notFound } = require('../utils/errors');
 
 // Відображення списку всіх товарів
-exports.listProducts = async (req, res) => {
+exports.listProducts = async (req, res, next) => {
     try {
-        const products = await Product.find().populate('category');
-        res.json(products);
+        const products = await productService.getAllProducts();
+        res.render('products', { products });
     } catch (error) {
-        res.status(500).json({ message: 'Помилка сервера' });
+        next(error);
     }
 };
 
 // Відображення товарів конкретної категорії
-exports.listProductsByCategory = async (req, res) => {
+exports.listProductsByCategory = async (req, res, next) => {
     try {
-        const products = await Product.find({ category: req.params.categoryId }).populate('category');
-        res.json(products);
+        const categoryId = req.params.categoryId;
+        const products = await productService.getProductsByCategoryId(categoryId);
+        res.render('categoryProducts', { products, categoryId });
     } catch (error) {
-        res.status(500).json({ message: 'Помилка сервера' });
+        next(error);
     }
 };
 
-exports.createProduct = async (req, res) => {
+exports.createProduct = async (req, res, next) => {
     try {
-        const product = new Product(req.body);
-        await product.save();
-        res.status(201).json(product);
+        // TODO: Реалізувати створення продукту через сервіс
+        res.status(501).json({ message: 'Not implemented yet' });
     } catch (error) {
-        res.status(400).json({ message: 'Помилка створення продукту' });
+        next(error);
     }
 };
 
-exports.updateProduct = async (req, res) => {
+exports.updateProduct = async (req, res, next) => {
     try {
-        const product = await Product.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
-        if (!product) {
-            return res.status(404).json({ message: 'Продукт не знайдено' });
-        }
-        res.json(product);
+        // TODO: Реалізувати оновлення продукту через сервіс
+        res.status(501).json({ message: 'Not implemented yet' });
     } catch (error) {
-        res.status(400).json({ message: 'Помилка оновлення продукту' });
+        next(error);
     }
 };
 
-exports.deleteProduct = async (req, res) => {
+exports.deleteProduct = async (req, res, next) => {
     try {
-        const product = await Product.findByIdAndDelete(req.params.id);
-        if (!product) {
-            return res.status(404).json({ message: 'Продукт не знайдено' });
-        }
-        res.json({ message: 'Продукт видалено' });
+        // TODO: Реалізувати видалення продукту через сервіс
+        res.status(501).json({ message: 'Not implemented yet' });
     } catch (error) {
-        res.status(400).json({ message: 'Помилка видалення продукту' });
+        next(error);
     }
 };

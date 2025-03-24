@@ -1,63 +1,58 @@
 const categoryService = require('../services/categoryService');
-const Category = require('../models/category');
+const { notFound } = require('../utils/errors');
 
 // Відображення списку категорій
-exports.listCategories = async (req, res) => {
+exports.listCategories = async (req, res, next) => {
     try {
-        const categories = await Category.find();
-        res.json(categories);
+        const categories = await categoryService.getAllCategories();
+        res.render('categories', { categories });
     } catch (error) {
-        res.status(500).json({ message: 'Помилка сервера' });
+        next(error);
     }
 };
 
 // Відображення однієї категорії з її товарами
-exports.showCategory = async (req, res) => {
+exports.showCategory = async (req, res, next) => {
     try {
-        const category = await Category.findById(req.params.id);
+        const categoryId = req.params.id;
+        const category = await categoryService.getCategoryById(categoryId);
+
         if (!category) {
-            return res.status(404).json({ message: 'Категорія не знайдена' });
+            throw notFound('Категорію не знайдено');
         }
-        res.json(category);
+
+        res.render('category', {
+            category,
+            subcategories: category.children
+        });
     } catch (error) {
-        res.status(500).json({ message: 'Помилка сервера' });
+        next(error);
     }
 };
 
-exports.createCategory = async (req, res) => {
+exports.createCategory = async (req, res, next) => {
     try {
-        const category = new Category(req.body);
-        await category.save();
-        res.status(201).json(category);
+        // TODO: Реалізувати створення категорії через сервіс
+        res.status(501).json({ message: 'Not implemented yet' });
     } catch (error) {
-        res.status(400).json({ message: 'Помилка створення категорії' });
+        next(error);
     }
 };
 
-exports.updateCategory = async (req, res) => {
+exports.updateCategory = async (req, res, next) => {
     try {
-        const category = await Category.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
-        if (!category) {
-            return res.status(404).json({ message: 'Категорія не знайдена' });
-        }
-        res.json(category);
+        // TODO: Реалізувати оновлення категорії через сервіс
+        res.status(501).json({ message: 'Not implemented yet' });
     } catch (error) {
-        res.status(400).json({ message: 'Помилка оновлення категорії' });
+        next(error);
     }
 };
 
-exports.deleteCategory = async (req, res) => {
+exports.deleteCategory = async (req, res, next) => {
     try {
-        const category = await Category.findByIdAndDelete(req.params.id);
-        if (!category) {
-            return res.status(404).json({ message: 'Категорія не знайдена' });
-        }
-        res.json({ message: 'Категорія видалена' });
+        // TODO: Реалізувати видалення категорії через сервіс
+        res.status(501).json({ message: 'Not implemented yet' });
     } catch (error) {
-        res.status(400).json({ message: 'Помилка видалення категорії' });
+        next(error);
     }
 };
