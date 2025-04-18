@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Побутова техніка",
+    "parentId": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "Крупна побутова техніка",
+        "parentId": 1,
+        "children": [
+          {
+            "id": 3,
+            "name": "Холодильники",
+            "parentId": 2,
+            "children": []
+          },
+          {
+            "id": 4,
+            "name": "Пральні машини",
+            "parentId": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Дрібна побутова техніка",
+        "parentId": 1,
+        "children": [
+          {
+            "id": 6,
+            "name": "Чайники",
+            "parentId": 5,
+            "children": []
+          },
+          {
+            "id": 7,
+            "name": "Тостери",
+            "parentId": 5,
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]
