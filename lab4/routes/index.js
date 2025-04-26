@@ -3,11 +3,10 @@ const router = express.Router();
 
 const productController = require('../controllers/productController');
 const categoryController = require('../controllers/categoryController');
+const indexController = require('../controllers/indexController');
 
 // Головна сторінка
-router.get('/', (req, res) => {
-  res.render('index');
-});
+router.get('/', indexController.index);
 
 // Сторінка з усіма товарами
 router.get('/products', productController.listProducts);

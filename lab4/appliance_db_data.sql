@@ -1,3 +1,6 @@
+INSERT INTO "User" (email, password, role)
+VALUES ('admin@example.com', '$2y$10$gwqLO7L/k2zDRM2R5cDnDu91wVx0rs.qpxidQNZf0pFWBfMVfH8Py', 'admin');
+
 INSERT INTO "Category" (name) VALUES 
 ('Кухонна техніка'),
 ('Побутова техніка'),

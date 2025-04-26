@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Управління товарами</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Управління товарами</h1>
+    <nav>
+        <a href="/admin">Назад до панелі</a> |
+        <a href="/">Головна</a> |
+        <a href="/auth/logout">Вийти</a>
+    </nav>
+
+    <div class="admin-panel">
+        <div class="admin-actions">
+            <a href="/admin/products/create" class="btn">Додати товар</a>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Назва</th>
+                    <th>Опис</th>
+                    <th>Ціна</th>
+                    <th>Категорія</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(product => { %>
+                    <tr>
+                        <td><%= product.id %></td>
+                        <td><%= product.name %></td>
+                        <td><%= product.description %></td>
+                        <td><%= product.price %></td>
+                        <td><%= product.category.name %></td>
+                        <td>
+                            <a href="/admin/products/<%= product.id %>/edit" class="btn btn-small">Редагувати</a>
+                            <form action="/admin/products/<%= product.id %>/delete" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Ви впевнені?')">Видалити</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html> 
