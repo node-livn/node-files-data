@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Редагування товару</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Редагування товару</h1>
+    <nav>
+        <a href="/admin/products">Назад до списку</a> |
+        <a href="/admin">Панель адміністратора</a> |
+        <a href="/">Головна</a>
+    </nav>
+
+    <div class="admin-panel">
+        <form action="/admin/products/<%= product.id %>" method="POST" class="form">
+            <div class="form-group">
+                <label for="name">Назва товару:</label>
+                <input type="text" id="name" name="name" value="<%= product.name %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Опис:</label>
+                <textarea id="description" name="description" required><%= product.description %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Ціна:</label>
+                <input type="number" id="price" name="price" step="0.01" min="0" value="<%= product.price %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoryId">Категорія:</label>
+                <select id="categoryId" name="categoryId" required>
+                    <option value="">Виберіть категорію</option>
+                    <% categories.forEach(category => { %>
+                        <optgroup label="<%= category.name %>">
+                            <option value="<%= category.id %>" <%= product.categoryId === category.id ? 'selected' : '' %>>
+                                <%= category.name %>
+                            </option>
+                            <% if (category.children && category.children.length > 0) { %>
+                                <% category.children.forEach(child => { %>
+                                    <option value="<%= child.id %>" <%= product.categoryId === child.id ? 'selected' : '' %>>
+                                        &nbsp;&nbsp;└─ <%= child.name %>
+                                    </option>
+                                <% }); %>
+                            <% } %>
+                        </optgroup>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Зберегти</button>
+                <a href="/admin/products" class="btn btn-secondary">Скасувати</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html> 

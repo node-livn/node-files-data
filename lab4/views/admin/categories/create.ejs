@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Створення категорії</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Створення категорії</h1>
+    <nav>
+        <a href="/admin/categories">Назад до списку</a> |
+        <a href="/admin">Панель адміністратора</a> |
+        <a href="/">Головна</a>
+    </nav>
+
+    <div class="admin-panel">
+        <form action="/admin/categories" method="POST" class="form">
+            <div class="form-group">
+                <label for="name">Назва категорії:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoryType">Тип категорії:</label>
+                <select id="categoryType" name="categoryType" onchange="toggleParentCategory()">
+                    <option value="main">Головна категорія</option>
+                    <option value="sub">Підкатегорія</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="parentCategoryGroup" style="display: none;">
+                <label for="parentId">Батьківська категорія:</label>
+                <select id="parentId" name="parentId">
+                    <option value="">Виберіть батьківську категорію</option>
+                    <% categories.forEach(category => { %>
+                        <option value="<%= category.id %>"><%= category.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Створити</button>
+                <a href="/admin/categories" class="btn btn-secondary">Скасувати</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function toggleParentCategory() {
+            const categoryType = document.getElementById('categoryType').value;
+            const parentCategoryGroup = document.getElementById('parentCategoryGroup');
+            const parentIdSelect = document.getElementById('parentId');
+            
+            if (categoryType === 'sub') {
+                parentCategoryGroup.style.display = 'block';
+                parentIdSelect.required = true;
+            } else {
+                parentCategoryGroup.style.display = 'none';
+                parentIdSelect.required = false;
+                parentIdSelect.value = '';
+            }
+        }
+    </script>
+</body>
+</html> 

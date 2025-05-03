@@ -1,16 +1,83 @@
-const categoryService = require('./categoryService');
-const productRepository = require('../repositories/productRepository');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
-exports.getAllProducts = async () => {
-    return await productRepository.loadProductsAsync();
+const createProduct = async (productData) => {
+    return await prisma.$transaction(async (tx) => {
+        // Перевіряємо, чи існує категорія
+        const category = await tx.category.findUnique({
+            where: { id: parseInt(productData.categoryId) }
+        });
+
+        if (!category) {
+            throw new Error('Category not found');
+        }
+
+        const product = await tx.product.create({
+            data: {
+                name: productData.name,
+                description: productData.description,
+                price: parseFloat(productData.price),
+                categoryId: parseInt(productData.categoryId)
+            }
+        });
+        return product;
+    });
 };
 
-// Пошук товару за ID
-exports.getProductById = async (productId) => {
-    return await productRepository.getProductById(productId);
+const updateProduct = async (id, productData) => {
+    return await prisma.$transaction(async (tx) => {
+        // Перевіряємо, чи існує категорія
+        const category = await tx.category.findUnique({
+            where: { id: parseInt(productData.categoryId) }
+        });
+
+        if (!category) {
+            throw new Error('Category not found');
+        }
+
+        const product = await tx.product.update({
+            where: { id: parseInt(id) },
+            data: {
+                name: productData.name,
+                description: productData.description,
+                price: parseFloat(productData.price),
+                categoryId: parseInt(productData.categoryId)
+            }
+        });
+        return product;
+    });
 };
 
-// Отримання товарів з конкретної категорії
-exports.getProductsByCategoryId = async (categoryId) => {
-    return await productRepository.getProductsByCategoryId(categoryId);
+const deleteProduct = async (id) => {
+    return await prisma.$transaction(async (tx) => {
+        const product = await tx.product.delete({
+            where: { id: parseInt(id) }
+        });
+        return product;
+    });
+};
+
+const getProduct = async (id) => {
+    return await prisma.product.findUnique({
+        where: { id: parseInt(id) },
+        include: {
+            category: true
+        }
+    });
+};
+
+const getAllProducts = async () => {
+    return await prisma.product.findMany({
+        include: {
+            category: true
+        }
+    });
+};
+
+module.exports = {
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    getProduct,
+    getAllProducts
 };
