@@ -1,11 +1,11 @@
-const productService = require('../services/productService');
+const productService = require('../services/sqlProductService');
 
 // Відображення списку всіх товарів
 exports.listProducts = async (req, res) => {
     try {
-        const products = await productService.getAllProducts(); // Отримуємо всі товари
+        const products = await productService.getAllProducts();
         if (!products || products.length === 0) {
-            return res.render('products', { products: [] }); // Якщо товари відсутні
+            return res.render('products', { products: [] });
         }
         res.render('products', { products });
     } catch (err) {
@@ -13,9 +13,6 @@ exports.listProducts = async (req, res) => {
         res.status(500).send('Помилка отримання списку товарів.');
     }
 };
-
-
-
 
 // Відображення товарів конкретної категорії
 exports.listProductsByCategory = async (req, res) => {

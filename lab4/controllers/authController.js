@@ -1,13 +1,10 @@
-const { PrismaClient } = require('@prisma/client');
+const authService = require('../services/sqlAuthService');
 const bcrypt = require('bcryptjs');
-const prisma = new PrismaClient();
 
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await prisma.user.findUnique({
-            where: { email }
-        });
+        const user = await authService.findUserByEmail(email);
 
         if (!user) {
             return res.status(401).render('error', {

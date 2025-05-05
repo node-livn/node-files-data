@@ -1,5 +1,5 @@
-const productService = require('../services/productService');
-const categoryService = require('../services/categoryService');
+const productService = require('../services/sqlProductService');
+const categoryService = require('../services/sqlCategoryService');
 
 // Отримання списку товарів
 const listProducts = async (req, res) => {

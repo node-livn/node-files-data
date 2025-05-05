@@ -1,4 +1,4 @@
-const categoryService = require('../services/categoryService');
+const categoryService = require('../services/sqlCategoryService');
 
 // Отримання списку категорій
 const listCategories = async (req, res) => {

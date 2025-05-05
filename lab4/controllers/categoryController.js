@@ -1,4 +1,4 @@
-const categoryService = require('../services/categoryService');
+const categoryService = require('../services/sqlCategoryService');
 
 // Відображення списку категорій
 exports.listCategories = async (req, res) => {
