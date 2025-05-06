@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Категорії товарів</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Категорії товарів</h1>
+    <nav>
+        <a href="/">Головна</a>
+        <% if (user) { %>
+            | <a href="/admin">Панель адміністратора</a> |
+            <a href="/auth/logout">Вийти</a>
+        <% } else { %>
+            | <a href="/auth/login" class="login-btn">Увійти</a>
+        <% } %>
+    </nav>
+
+    <div class="categories-list">
+        <% categories.forEach(category => { %>
+            <div class="category-card">
+                <h2><%= category.name %></h2>
+                <% if (category.children && category.children.length > 0) { %>
+                    <div class="subcategories">
+                        <h3>Підкатегорії:</h3>
+                        <ul>
+                            <% category.children.forEach(child => { %>
+                                <li>
+                                    <a href="/categories/<%= child.id %>"><%= child.name %></a>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                <% } %>
+                <a href="/categories/<%= category.id %>" class="btn">Переглянути товари</a>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>

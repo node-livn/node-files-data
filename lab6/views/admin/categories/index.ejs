@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Управління категоріями</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Управління категоріями</h1>
+    <nav>
+        <a href="/admin">Назад до панелі</a> |
+        <a href="/">Головна</a> |
+        <a href="/auth/logout">Вийти</a>
+    </nav>
+
+    <div class="admin-panel">
+        <div class="admin-actions">
+            <a href="/admin/categories/create" class="btn">Додати категорію</a>
+        </div>
+
+        <div class="categories-section">
+            <h2>Головні категорії</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Назва</th>
+                        <th>Кількість підкатегорій</th>
+                        <th>Кількість товарів</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% mainCategories.forEach(category => { %>
+                        <tr>
+                            <td><%= category.id %></td>
+                            <td><%= category.name %></td>
+                            <td><%= category.children ? category.children.length : 0 %></td>
+                            <td><%= category.products ? category.products.length : 0 %></td>
+                            <td>
+                                <a href="/admin/categories/<%= category.id %>/edit" class="btn btn-small">Редагувати</a>
+                                <form action="/admin/categories/<%= category.id %>/delete" method="POST" style="display: inline;">
+                                    <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Ви впевнені?')">Видалити</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="categories-section">
+            <h2>Підкатегорії</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Назва</th>
+                        <th>Батьківська категорія</th>
+                        <th>Кількість товарів</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% subCategories.forEach(category => { %>
+                        <tr>
+                            <td><%= category.id %></td>
+                            <td><%= category.name %></td>
+                            <td><%= category.parent ? category.parent.name : 'Немає' %></td>
+                            <td><%= category.products ? category.products.length : 0 %></td>
+                            <td>
+                                <a href="/admin/categories/<%= category.id %>/edit" class="btn btn-small">Редагувати</a>
+                                <form action="/admin/categories/<%= category.id %>/delete" method="POST" style="display: inline;">
+                                    <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Ви впевнені?')">Видалити</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html> 

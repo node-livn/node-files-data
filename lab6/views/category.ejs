@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title><%= category.name %> - Товари</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1><%= category.name %></h1>
+    <nav>
+        <a href="/categories">Назад до категорій</a> |
+        <a href="/">Головна</a>
+        <% if (user) { %>
+            | <a href="/admin">Панель адміністратора</a> |
+            <a href="/auth/logout">Вийти</a>
+        <% } else { %>
+            | <a href="/auth/login" class="login-btn">Увійти</a>
+        <% } %>
+    </nav>
+
+    <% if (subcategories && subcategories.length > 0) { %>
+        <div class="subcategories-section">
+            <h2>Підкатегорії:</h2>
+            <div class="subcategories-list">
+                <% subcategories.forEach(subcategory => { %>
+                    <div class="subcategory-card">
+                        <h3><%= subcategory.name %></h3>
+                        <a href="/categories/<%= subcategory.id %>" class="btn">Переглянути товари</a>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="products-section">
+        <h2>Товари в категорії:</h2>
+        <% if (category.products && category.products.length > 0) { %>
+            <div class="products-grid">
+                <% category.products.forEach(product => { %>
+                    <div class="product-card">
+                        <h3><%= product.name %></h3>
+                        <p class="description"><%= product.description %></p>
+                        <p class="price">Ціна: <%= product.price %> грн</p>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <p>В цій категорії поки немає товарів</p>
+        <% } %>
+    </div>
+</body>
+</html>
