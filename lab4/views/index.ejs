@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Головна</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Електронний каталог товарів</h1>
+    <nav>
+        <a href="/categories">Категорії</a> |
+        <a href="/products">Усі Товари</a>
+        <% if (user) { %>
+            | <a href="/admin">Панель адміністратора</a> |
+            <a href="/auth/logout">Вийти</a>
+        <% } else { %>
+            | <a href="/auth/login" class="login-btn">Увійти</a>
+        <% } %>
+    </nav>
+</body>
+</html>

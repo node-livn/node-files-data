@@ -1,0 +1,22 @@
+{
+  "name": "node-lab3",
+  "version": "0.0.0",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "init-db": "node init-db.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "~4.16.1",
+    "express-session": "^1.18.1",
+    "pg": "^8.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
